@@ -1,61 +1,15 @@
-function lineTotal(p){
-    return p.price * p.qty;
-}
 
-function inventoryValue(list){
-    return list.reduce((sum,p) => sum + lineTotal(p),0);
-}
+import { categories, products } from "./data.js";
+import { lineTotal, inventoryValue, stockLevel, findProductBySku, countByCategory } from "./helpers.js";
 
-function stockLevel(qty){
-    if (qty>=5) return "Du";
-    if (qty>=2) return "Sap het";
-    return "Can nhap";
-}
-
-
-function findProductBySku(list, sku){
-    return list.find((p) => p.sku === sku);
-}
-
-function countByCategory(list, categoryId){
-    return list.filter((p) => p.category_id === categoryId).length;
-}
-
-function updateStats(){
+function renderStats(){
     const el = document.querySelector("#stats");
-    if (!el) return;
+    if(!el) return;
     const total = inventoryValue(products);
-    el.textContent = 
-    `So san pham = ${products.length}\nTong gia tri kho = ${total}`;
+    el.textContent = `So san pham = ${products.length}\n Tong gia tri kho = ${total}`;
 }
-updateStats();
+renderStats();
 
-categories.forEach((cat) => {
-    const subset = products.filter((p) => p.category_id === cat.id);
-    console.log(cat.name, subset.length, inventoryValue(subset));
-});
-
-console.log(inventoryValue(products));
-console.log(stockLevel(10), stockLevel(3), stockLevel(1));
-
-function attachStockBadges(){
-    document.querySelectorAll(".cm-card").forEach((card) => {
-        const p = findProductBySku(products, card.dataset.sku);
-        if(!p) return;
-        const badge = document.createElement("p");
-        badge.className = "cm-stock";
-        badge.textContent = stockLevel(p.qty);
-        card.appendChild(badge);
-    });
-}
-
-attachStockBadges();
-
-products.forEach((p) => {
-  const card = document.querySelector(`.cm-card[data-sku="${p.sku}"]`);
-  const badge = card?.querySelector(".cm-stock")?.textContent;
-  console.log(p.sku, badge, badge === stockLevel(p.qty) ? "OK" : "FAIL");
-});
 
 function categoryName(id){
     const c = categories.find((c) => c.id === id);
@@ -103,16 +57,20 @@ render(products);
 let currentList = products;
 const select = document.querySelector('[data-testid="cm-filter-category"]');
 
-select.addEventListener("change", () => {
-    const v = select.value;
-    // currentList = 
-    //  v === "all"
-    //     ? products
-    //     : products.filter((p) => p.category_id === Number(v));
+
+function applyFilter(v){
     if(v==="all") currentList = products;
     else currentList = products.filter((p) => p.category_id === Number(v));
     render(currentList);
-});
+}
+
+if(select){
+    select.addEventListener("change", (e) => {
+        const v = select.value;
+        localStorage.setItem("cm_filter", v);
+        applyFilter(v);
+    });
+}
 
 document.querySelector("#sort-price").addEventListener("click", () => {
     const sorted = [...currentList].sort((a,b) => a.price - b.price);
@@ -125,3 +83,7 @@ grid.addEventListener("click", (e) => {
     if(!card) return;
     console.log("Ban vua bam card:", card.dataset.sku);
 });
+
+const saved = localStorage.getItem("cm_filter") ?? "all";
+select.value = saved;
+applyFilter(saved);
