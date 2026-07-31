@@ -235,6 +235,11 @@
             <p id="form-msg" aria-live="polite"></p>
         </section>
 
+        <section style="margin-top: 2rem;">
+            <h3>Danh sach subscriber</h3>
+            <ul data-testid="cm-subscriber-list"></ul>
+        </section>
+
         <section id="add-product">
             <h2>Them san pham</h2>
             <form data-testid="cm-product-form">
@@ -250,11 +255,20 @@
             </label>
        <br><label>Gia <input name="price" type="number" required></label>
         <br><label>So luong <input name="qty" type="number" value="0"></label>
-         <button type="submit">Them san pham</button>
+         <br><br><button type="submit">Them san pham</button>
         </form>
         <p id="product-form-msg" aria-live="polite"></p>
 </section>
 
+    <section style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #eee;">
+  <h2>Dang nhap quan tri</h2>
+  <form data-testid="cm-login-form">
+    <label>Tai khoan: <input name="username" type="text" required></label>
+    <label>Mat khau: <input name="password" type="password" required></label>
+    <button type="submit">Dang nhap</button>
+  </form>
+  <p id="login-msg" aria-live="polite"></p>
+    </section>
        
 
         <!-- CM_EXPECT product_count=8 category_count=3 inventory_value=41380000 -->
@@ -288,5 +302,6 @@
      <script type="module" src="app.js"></script>
      <!-- CM_EXPECT product_count=8 inventory_value=41380000 js_files=data.js,app.js -->
       <!-- CM_EXPECT product_count=8 filter_counts=8,3,3,2 first_sorted_sku=MS-03 -->
+       <!-- CM_EXPECT product_count=8 create_sku=MN-03 count_after=9 inventory_after=50380000 modules=data.js,helpers.js,app.js -->
 </body>
 </html>

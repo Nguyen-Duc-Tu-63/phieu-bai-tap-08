@@ -113,4 +113,96 @@ form.addEventListener("submit", (e) => {
     msgEl.textContent = "Dang ky thanh cong";
     msgEl.className = "cm-success";
     form.reset();
+
+    renderSubscribers();
 });
+
+const addForm = document.querySelector('[data-testid="cm-product-form"]');
+const addMsgEl = document.querySelector("#product-form-msg");
+
+if(addForm && addMsgEl){
+    addForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const f = addForm.elements;
+        const sku = f.sku.value.trim();
+        const name = f.name.value.trim();
+        const category_id = f.category_id.value;
+        const price = Number(f.price.value);
+        const qty = Number(f.qty.value || 0);
+
+        const errors = [];
+
+        if(!sku || !name || !category_id){
+            errors.push("Thieu thong tin bat buoc");
+        }
+
+        if(price <= 0) errors.push("Gia phai lon hon 0");
+
+        if(products.some((p) => p.sku === sku)){
+            errors.push("SKU da ton tai");
+        }
+
+        if(errors.length > 0){
+            addMsgEl.textContent = errors.join(". ");
+            addMsgEl.className = "cm-error";
+            return;
+        }
+
+        const newItem = {
+            sku : sku,
+            name : name,
+            category_id : Number(category_id),
+            price : price,
+            qty : qty
+        }
+        products.push(newItem);
+
+        addMsgEl.textContent = "Them san pham thanh cong";
+        addMsgEl.className = "cm-success";
+        render(products);
+        renderStats();
+        addForm.reset();
+        
+    });
+
+}
+
+function renderSubscribers(){
+    const listEl = document.querySelector('[data-testid="cm-subscriber-list"]');
+    if(!listEl) return;
+
+    listEl.innerHTML = "";
+
+    const subs = JSON.parse(localStorage.getItem("cm_subscribers") ?? "[]");
+
+    for(const sub of subs){
+        const li = document.createElement("li");
+        li.textContent = `${sub.name} - ${sub.email}`;
+        listEl.appendChild(li);
+    }
+}
+renderSubscribers();
+
+const loginForm = document.querySelector('[data-testid="cm-login-form"]');
+const loginMsg = document.querySelector("#login-msg");
+
+if (loginForm && loginMsg) {
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        
+        const user = loginForm.elements.username.value.trim();
+        const pass = loginForm.elements.password.value; // Password thường không trim khoảng trắng
+
+        // Kiểm tra hard-code (Cố định trong mã nguồn)
+        if (user === "admin" && pass === "CampusMart@01") {
+            localStorage.setItem("cm_auth", "true"); // Đánh dấu đã đăng nhập
+            loginMsg.textContent = "Dang nhap thanh cong";
+            loginMsg.className = "cm-success";
+            loginForm.reset();
+        } else {
+            loginMsg.textContent = "Sai tai khoan hoac mat khau";
+            loginMsg.className = "cm-error";
+        }
+    });
+}
