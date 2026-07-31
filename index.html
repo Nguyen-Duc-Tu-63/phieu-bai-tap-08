@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusMart — Module & Storage (Buoi 8)</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="cm-header">
+        <h1 data-testid="cm-brand">CampusMart</h1>
+
+        <nav  class="cm-nav" data-testid="cm-nav" aria-label="Menu chinh">
+            <ul>
+                <li><a href="categories">Trang chu</a></li>
+                <li><a href="products">San Pham</a></li>
+                <li><a href="about">Gioi thieu</a></li>
+                <li><a href="subscribe">Dang ky</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <main class="cm-main" id="main-content">
+
+         <section class="cm-hero" id="hero">
+            <h2>Do choi cong nghe cho sinh vien</h2>
+            <a href="products" class="cm-btn">Xem catalog</a>
+        </section>
+
+        <section id="stats" data-testid="cm-stats" aria-label="polite"></section>
+
+        <section id="categories">
+            <h2>Danh muc</h2>
+            <ul data-testid="cm-category-list">
+                <li>Ban phim</li>
+                <li>Chuot</li>
+                <li>Man hinh</li>
+            </ul>
+        </section>
+
+        <section id="products">
+            <h2>Danh sach san pham</h2>
+            <label for="filter-cat">Loc theo danh muc</label>
+            <select id="filter-cat" data-testid="cm-filter-category">
+                <option value="all">Tat ca</option>
+                <option value="1">Ban phim</option>
+                <option value="2">Chuot</option>
+                <option value="3">Man hinh</option>
+            </select>
+
+            <button type="button" id = "sort-price">Gia tang dan</button>
+            <p data-testid = "cm-visible-count"></p>
+
+
+            <div class="cm-grid" data-testid="cm-product-table">
+                
+            </div>
+            
+            
+            <div data-testid="cm-inventory-total">
+                <p>Tong gia tri kho = 41380000</p>
+                <p>So san pham = 8</p>
+            </div>
+        </section>
+
+
+        <div class="table-wrap">
+            <table class="cm-table" data-testid="cm-product-table">
+                <caption>Danh sach san pham CORE</caption>
+                <thead>
+                    <tr>
+                        <th>SKU</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Danh muc (chữ)</th>
+                        <th>Price</th>
+                        <th>QTY</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr data-testid="cm-product-row" data-sku="KB-01">
+                        <td>KB-01</td>
+                        <td>
+                            <figure>
+                                <img src="https://placehold.co/50x50?text=K2" alt="Ban phim Keychron K2" width="120" height="80">
+                                <figcaption>KB-01</figcaption>
+                            </figure>
+                           
+                        </td>
+                        <td>Keychron K2</td>
+                        <td>Ban phim</td>
+                        <td>1890000</td>
+                        <td>3</td>
+                    </tr>
+
+                     <tr data-testid="cm-product-row" data-sku="KB-02">
+                        <td>KB-02</td>
+                        <td>
+                            <figure>
+                                <img src="https://placehold.co/50x50?text=3087" alt="Ban phim Akko 3087" width="120" height="80">
+                                <figcaption>KB-02</figcaption>
+                            </figure>
+                            
+                        </td>
+                        <td>Akko 3087</td>
+                        <td>Ban phim</td>
+                        <td>1290000</td>
+                        <td>5</td>
+                    </tr>
+                    
+                     <tr data-testid="cm-product-row" data-sku="MS-01">
+                        <td>MS-01</td>
+                        <td>
+                            <figure>
+                                <img src="https://placehold.co/50x50?text=3087" alt="Chuot Logitech M331" width="120" height="80">
+                                <figcaption>MS-01</figcaption>
+                            </figure>
+                            
+                        </td>
+                        <td>Logitech M331</td>
+                        <td>Chuot</td>
+                        <td>290000</td>
+                        <td>10</td>
+                    </tr>
+
+                     <tr data-testid="cm-product-row" data-sku="MS-02">
+                        <td>MS-02</td>
+                        <td>
+                            <figure>
+                                <img src="https://placehold.co/50x50?text=3087" alt="Chuot Razer Viper" width="120" height="80">
+                                <figcaption>MS-02</figcaption>
+                            </figure>
+                            
+                        </td>
+                        <td>Razer Viper</td>
+                        <td>Chuot</td>
+                        <td>990000</td>
+                        <td>4</td>
+                    </tr>
+
+
+                    <tr data-testid="cm-product-row" data-sku="KB-03">
+                        <td>KB-03</td>
+                        <td>
+                            <figure>
+                                <img src="https://placehold.co/50x50?text=3087" alt="Ban phim Leopold FC660M" width="120" height="80">
+                                <figcaption>KB-03</figcaption>
+                            </figure>
+                            
+                        </td>
+                        <td>Leopold FC660M</td>
+                        <td>Ban phim</td>
+                        <td>2750000</td>
+                        <td>2</td>
+                    </tr>
+
+                    <tr data-testid="cm-product-row" data-sku="MS-03">
+                        <td>MS-03</td>
+                        <td>
+                            <figure>
+                                <img src="https://placehold.co/50x50?text=3087" alt="Chuot Xiaomi Silent" width="120" height="80">
+                                <figcaption>MS-03</figcaption>
+                            </figure>
+                            
+                        </td>
+                        <td>Xiaomi Silent</td>
+                        <td>Chuot</td>
+                        <td>250000</td>
+                        <td>8</td>
+                    </tr>
+
+                    <tr data-testid="cm-product-row" data-sku="MN-01">
+                        <td>MN-01</td>
+                        <td>
+                            <figure>
+                                <img src="https://placehold.co/50x50?text=3087" alt="Man hinh Dell 24 inch" width="120" height="80">
+                                <figcaption>MN-01</figcaption>
+                            </figure>
+                            
+                        </td>
+                        <td>Dell 24 inch</td>
+                        <td>Man hinh</td>
+                        <td>3200000</td>
+                        <td>2</td>
+                    </tr>
+
+                    <tr data-testid="cm-product-row" data-sku="MN-02">
+                        <td>MN-02</td>
+                        <td>
+                            <figure>
+                                <img src="https://placehold.co/50x50?text=3087" alt="Man hinh LG UltraFine" width="120" height="80">
+                                <figcaption>MN-02</figcaption></td>
+                            </figure>
+                            
+                        <td>LG UltraFine</td>
+                        <td>Man hinh</td>
+                        <td>8500000</td>
+                        <td>1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>                
+
+        <section id="subscribe">
+            <form data-testid="cm-subsrcibe-form">
+                <fieldset>
+                    <legend>Dang ky nhan tin</legend>
+
+                    <div>
+                        <label for="name">Ho ten</label>
+                        <input type="text" id="name" name="name" required minlength="2">
+                    </div>
+                    <br>
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <br>
+                    <div>
+                        <label for="category_id">Danh muc quan tam</label>
+                        <select id="category_id" name="category_id" required>
+                            <option value="">--Chon danh muc--</option>
+                            <option value="1">Ban phim </option>
+                            <option value="2">Chuot</option>
+                            <option value="3">Man hinh</option>
+                        </select>
+                    </div>
+                    <br>
+                    <button type="submit">Dang ky</button>
+                </fieldset>
+            </form>
+        </section>
+
+       
+
+        <!-- CM_EXPECT product_count=8 category_count=3 inventory_value=41380000 -->
+    </main>
+
+    <footer id="about">
+        <hr>
+        <h2>Lien he voi chung toi</h2>
+
+        <form>
+            <fieldset>
+                <legend>Gui tin nhan</legend>
+
+                <div>
+                    <label for="contact_name">Ho ten</label>
+                    <input type="text" id="contact_name" name="contact_name" required>
+                </div>
+                <br>
+
+                <div>
+                    <label for="message">Noi dung</label><br>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <br>
+                <button type="submit">Gui</button>
+            </fieldset>
+        </form>
+        <p>&copy; 2026 Nguyen Duc Tu</p>
+    </footer>
+    <!-- CM_EXPECT product_count=8 card_count=8 inventory_value=41380000 responsive=640,1024 -->
+     <script src="data.js"></script>
+     <script src="app.js"></script>
+     <!-- CM_EXPECT product_count=8 inventory_value=41380000 js_files=data.js,app.js -->
+      <!-- CM_EXPECT product_count=8 filter_counts=8,3,3,2 first_sorted_sku=MS-03 -->
+</body>
+</html>
