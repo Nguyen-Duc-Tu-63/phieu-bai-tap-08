@@ -205,7 +205,7 @@
         </div>                
 
         <section id="subscribe">
-            <form data-testid="cm-subsrcibe-form">
+            <form data-testid="cm-subsrcibe-form" novalidate>
                 <fieldset>
                     <legend>Dang ky nhan tin</legend>
 
@@ -232,7 +232,28 @@
                     <button type="submit">Dang ky</button>
                 </fieldset>
             </form>
+            <p id="form-msg" aria-live="polite"></p>
         </section>
+
+        <section id="add-product">
+            <h2>Them san pham</h2>
+            <form data-testid="cm-product-form">
+            <label>SKU <input name="sku" required></label><br>
+            <label>Ten <input name="name" required></label>
+            <br><label>Danh muc
+             <select name="category_id" required>
+                <option value="">-- Chon danh muc --</option>
+                <option value="1">Ban phim</option>
+                <option value="2">Chuot</option>
+                <option value="3">Man hinh</option>
+            </select>
+            </label>
+       <br><label>Gia <input name="price" type="number" required></label>
+        <br><label>So luong <input name="qty" type="number" value="0"></label>
+         <button type="submit">Them san pham</button>
+        </form>
+        <p id="product-form-msg" aria-live="polite"></p>
+</section>
 
        
 

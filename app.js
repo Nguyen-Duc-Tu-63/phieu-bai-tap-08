@@ -87,3 +87,30 @@ grid.addEventListener("click", (e) => {
 const saved = localStorage.getItem("cm_filter") ?? "all";
 select.value = saved;
 applyFilter(saved);
+
+const form = document.querySelector('[data-testid="cm-subsrcibe-form"]');
+const msgEl = document.querySelector("#form-msg");   
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = form.elements.name.value.trim();
+    const email = form.elements.email.value.trim();
+
+    const errors = [];
+    if(name.length < 2) errors.push("Ten toi thieu 2 ky tu");
+    if(!/^\S+@\S+\.\S+$/.test(email)) errors.push("Email khong hop le");
+
+    if(errors.length > 0){
+        msgEl.textContent = errors.join(". ");
+        msgEl.className = "cm-error";
+        return;
+    }
+
+    const subs = JSON.parse(localStorage.getItem("cm_subscribers") ?? "[]");
+    subs.push({ name, email, category_id: Number(form.elements.category_id.value)});
+    localStorage.setItem("cm_subscribers", JSON.stringify(subs));
+
+    msgEl.textContent = "Dang ky thanh cong";
+    msgEl.className = "cm-success";
+    form.reset();
+});
