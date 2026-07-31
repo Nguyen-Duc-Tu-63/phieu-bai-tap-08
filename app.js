@@ -88,7 +88,7 @@ const saved = localStorage.getItem("cm_filter") ?? "all";
 select.value = saved;
 applyFilter(saved);
 
-const form = document.querySelector('[data-testid="cm-subsrcibe-form"]');
+const form = document.querySelector('[data-testid="cm-subscribe-form"]');
 const msgEl = document.querySelector("#form-msg");   
 
 form.addEventListener("submit", (e) => {
